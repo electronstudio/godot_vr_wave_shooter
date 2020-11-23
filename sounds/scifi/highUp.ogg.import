@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/highUp.ogg-3bf954c5767dc460eb453e46b55c9111.oggstr"
+
+[deps]
+
+source_file="res://sounds/scifi/highUp.ogg"
+dest_files=[ "res://.import/highUp.ogg-3bf954c5767dc460eb453e46b55c9111.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

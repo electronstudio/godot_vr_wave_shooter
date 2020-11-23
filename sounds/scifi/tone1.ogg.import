@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tone1.ogg-032696fbcfedb04d58faee30eaf498fd.oggstr"
+
+[deps]
+
+source_file="res://sounds/scifi/tone1.ogg"
+dest_files=[ "res://.import/tone1.ogg-032696fbcfedb04d58faee30eaf498fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

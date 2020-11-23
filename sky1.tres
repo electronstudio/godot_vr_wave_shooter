@@ -1,0 +1,8 @@
+[gd_resource type="ProceduralSky" format=2]
+
+[resource]
+sky_top_color = Color( 0.141176, 0, 0.227451, 1 )
+sky_horizon_color = Color( 1, 0.603922, 0.94902, 1 )
+sky_curve = 0.18
+sky_energy = 0.2
+ground_bottom_color = Color( 0, 0, 0, 1 )

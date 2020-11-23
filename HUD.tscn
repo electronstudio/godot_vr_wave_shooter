@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://interface/fonts/kenvector_future_32.tres" type="DynamicFont" id=1]
+
+[node name="HUD" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 956.0
+margin_top = 484.0
+margin_right = 964.0
+margin_bottom = 604.0
+color = Color( 0, 0.0509804, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+margin_left = 900.0
+margin_top = 537.0
+margin_right = 1020.0
+margin_bottom = 545.0
+color = Color( 0, 0.0509804, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+margin_left = -0.840942
+margin_right = 1919.16
+margin_bottom = 24.0
+color = Color( 0, 0.0509804, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="red_filter" type="ColorRect" parent="."]
+visible = false
+margin_left = -190.0
+margin_top = -181.0
+margin_right = 2114.0
+margin_bottom = 1265.0
+color = Color( 1, 0.0627451, 0.0156863, 0.670588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+margin_top = 1056.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0.0509804, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 613.748
+margin_top = -6.49972
+margin_right = 794.748
+margin_bottom = 68.5003
+custom_fonts/font = ExtResource( 1 )
+text = "SCORE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="."]
+margin_top = 246.0
+margin_right = 961.0
+margin_bottom = 321.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 1249.46
+margin_top = -6.49972
+margin_right = 1430.46
+margin_bottom = 68.5003
+custom_fonts/font = ExtResource( 1 )
+text = "HEALTH
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="."]
+margin_left = 775.2
+margin_top = -6.49973
+margin_right = 956.205
+margin_bottom = 62.5003
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health" type="Label" parent="."]
+margin_left = 1153.6
+margin_top = -6.49973
+margin_right = 1334.61
+margin_bottom = 62.5003
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
