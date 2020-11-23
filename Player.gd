@@ -5,7 +5,7 @@ var score = 0
 var health = 100
 
 onready var env = get_node("/root/Main/WorldEnvironment").environment
-onready var HUD = get_node("../HUD/Viewport/HUD")
+onready var HUD = get_node("/root/Main/VR/Headset/HUD/Viewport/HUD")
 
 func _ready():
 	Globals.connect("score_points", self, "_score_points")
