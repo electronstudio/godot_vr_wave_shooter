@@ -12,6 +12,7 @@ var ovr_utilities = null;
 var ovr_vr_api_proxy = null;
 var ovr_input = null;
 
+var arvr_interface: ARVRInterface
 
 var controllers_vibration_duration = {}
 var ovrVrApiTypes = load("res://addons/godot_ovrmobile/OvrVrApiTypes.gd").new();
@@ -61,7 +62,10 @@ func _ready():
 		return
 	_initialize_flatscreen()
 
-		
+func _exit_tree():
+	print("VR node exited")
+	arvr_interface.uninitialize()
+	
 				
 
 func setup_HUD():
@@ -164,7 +168,7 @@ func _initialize_native_mobile_arvr_interface():
 	if not force_mobile_vr and OS.get_name()!="Android" and OS.get_name()!="iOS":
 		print("not trying native mobile interface because wrong platform")
 		return
-	var arvr_interface = ARVRServer.find_interface("Native mobile")
+	arvr_interface = ARVRServer.find_interface("Native mobile")
 	if arvr_interface and arvr_interface.initialize():
 		get_viewport().arvr = true
 		arvr_interface.display_to_lens = 5.463120713829994
@@ -181,7 +185,7 @@ func _initialize_native_mobile_arvr_interface():
 
 func _initialize_openvr_arvr_interface():
 	print("initialize_openvr_arvr_interface")
-	var arvr_interface = ARVRServer.find_interface("OpenVR")
+	arvr_interface = ARVRServer.find_interface("OpenVR")
 	if !arvr_interface:
 		print("Couldn't find OpenVR interface")
 	elif arvr_interface.initialize():
@@ -201,7 +205,7 @@ func _initialize_openvr_arvr_interface():
 
 func _initialize_oculus_arvr_interface():
 	print("initialize_oculus_arvr_interface")
-	var arvr_interface = ARVRServer.find_interface("Oculus")
+	arvr_interface = ARVRServer.find_interface("Oculus")
 	if !arvr_interface:
 		print("Couldn't find Oculus interface")
 	elif arvr_interface.initialize():
@@ -220,7 +224,7 @@ func _initialize_oculus_arvr_interface():
 	return false
 
 func _initialize_ovr_mobile_arvr_interface():
-	var arvr_interface = ARVRServer.find_interface("OVRMobile")
+	arvr_interface = ARVRServer.find_interface("OVRMobile")
 	if !arvr_interface:
 		print("Couldn't find OVRMobile interface")
 	else:
