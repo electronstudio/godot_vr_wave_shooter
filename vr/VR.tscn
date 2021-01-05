@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/godot_ovrmobile/example_scenes/right_hand_model.glb" type="PackedScene" id=4]
 [ext_resource path="res://addons/godot_ovrmobile/example_scenes/left_hand_model.glb" type="PackedScene" id=5]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 
 [sub_resource type="QuadMesh" id=2]
@@ -12,7 +11,6 @@ material = SubResource( 1 )
 size = Vector2( 1920, 1080 )
 
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("Headset/HUD/Viewport")
 
 [sub_resource type="SpatialMaterial" id=4]
 resource_local_to_scene = true

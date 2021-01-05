@@ -20,11 +20,7 @@ var was_world_scale = 1.0
 
 var fix_hand_position = false
 
-export var enable_oculus_vr = true
-export var enable_mobile_vr = true
-export var force_mobile_vr = false
-export var enable_openvr = true
-export var enable_oculus_mobile_vr = true
+
 
 
 var _mouse_offset = Vector2()
@@ -48,31 +44,61 @@ export var move_speed = 1.0
 export var quick_turn_degrees=45
 var _joy_centered=true
 
+enum VR_MODE {
+	AUTODETECT = 0
+	FLATSCREEN = 1
+	OCULUS_DESKTOP = 2
+	OCULUS_MOBILE = 3
+	CARDBOARD = 4
+	OPENVR = 5
+}
+
 
 
 func _ready():
-	print("1")
-	var args = OS.get_cmdline_args()
-	print("2")
-	print(args)
-	print("3")
 	setup_HUD()
-	if enable_oculus_vr and _initialize_oculus_arvr_interface():
+	
+	var args = OS.get_cmdline_args()
+	if args.empty():
+		_autodetect_vr()
+	else:
+		match int(args[0]):
+			VR_MODE.AUTODETECT:
+				_autodetect_vr()
+			VR_MODE.FLATSCREEN:
+				_initialize_flatscreen()
+			VR_MODE.OCULUS_DESKTOP:
+				_initialize_oculus_arvr_interface()
+			VR_MODE.OCULUS_MOBILE:
+				_initialize_ovr_mobile_arvr_interface()
+			VR_MODE.CARDBOARD:
+				_initialize_native_mobile_arvr_interface()
+			VR_MODE.OPENVR:
+				_initialize_openvr_arvr_interface()
+			_:
+				_autodetect_vr()
+
+	
+	
+func _autodetect_vr():
+	print("autodetect vr")
+	if  _initialize_oculus_arvr_interface():
 		return
-	if enable_oculus_mobile_vr and _initialize_ovr_mobile_arvr_interface():
+	if  _initialize_ovr_mobile_arvr_interface():
 		return
-	if enable_openvr and _initialize_openvr_arvr_interface():
+	if  _initialize_openvr_arvr_interface():
 		return
-	if enable_mobile_vr and _initialize_native_mobile_arvr_interface():
+	if  (OS.get_name()=="Android" or OS.get_name()=="iOS") and _initialize_native_mobile_arvr_interface():
 		return
 	_initialize_flatscreen()
 
 func _exit_tree():
 	print("VR node exited")
-	if arvr_interface.get_name() == "Oculus":
-		print("not restarting VR because Oculus driver crashes")
-	else:
-		arvr_interface.uninitialize()
+	if arvr_interface:
+		if arvr_interface.get_name() == "Oculus":
+			print("not restarting VR because Oculus driver crashes")
+		else:
+			arvr_interface.uninitialize()
 	
 				
 
@@ -173,9 +199,6 @@ func _process_keys():
 
 func _initialize_native_mobile_arvr_interface():
 	print("initialize_native_mobile_arvr_interface")
-	if not force_mobile_vr and OS.get_name()!="Android" and OS.get_name()!="iOS":
-		print("not trying native mobile interface because wrong platform")
-		return
 	arvr_interface = ARVRServer.find_interface("Native mobile")
 	if arvr_interface and arvr_interface.initialize():
 		get_viewport().arvr = true

@@ -11,7 +11,6 @@
 [ext_resource path="res://sounds/scifi/zapThreeToneDown.ogg" type="AudioStream" id=9]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("VR/Headset/HUD/Viewport")
 
 [sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
