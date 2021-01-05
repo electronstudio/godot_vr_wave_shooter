@@ -15,7 +15,7 @@ var ovr_input = null;
 var arvr_interface: ARVRInterface
 
 var controllers_vibration_duration = {}
-var ovrVrApiTypes = load("res://addons/godot_ovrmobile/OvrVrApiTypes.gd").new();
+#var ovrVrApiTypes = load("res://addons/godot_ovrmobile/OvrVrApiTypes.gd").new();
 var was_world_scale = 1.0
 
 var fix_hand_position = false
@@ -51,6 +51,11 @@ var _joy_centered=true
 
 
 func _ready():
+	print("1")
+	var args = OS.get_cmdline_args()
+	print("2")
+	print(args)
+	print("3")
 	setup_HUD()
 	if enable_oculus_vr and _initialize_oculus_arvr_interface():
 		return
@@ -64,7 +69,10 @@ func _ready():
 
 func _exit_tree():
 	print("VR node exited")
-	arvr_interface.uninitialize()
+	if arvr_interface.get_name() == "Oculus":
+		print("not restarting VR because Oculus driver crashes")
+	else:
+		arvr_interface.uninitialize()
 	
 				
 
