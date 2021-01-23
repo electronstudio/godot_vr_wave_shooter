@@ -18,3 +18,16 @@ You can supply a numeric argument on the command line to specify your VR driver:
 	OCULUS_MOBILE = 3
 	CARDBOARD = 4
 	OPENVR = 5
+
+# Assets used
+
+3d character models by http://quaternius.com/
+
+https://www.patreon.com/quaternius
+
+Graveyard models by https://kenney.nl
+
+Blaster models by https://kenney.nl
+
+Sci-fi sounds by https://kenney.nl
+
