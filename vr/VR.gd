@@ -1,6 +1,8 @@
 # To view log/print messages use `adb logcat -s godot:* GodotOVRMobile:*` from a command prompt
 # TODO: test vibration
 # Fix Viewport errors
+# Teleportation
+# Prevent walking through
 extends ARVROrigin
 
 var ovr_init_config = null;
@@ -20,6 +22,7 @@ var was_world_scale = 1.0
 
 var fix_hand_position = false
 
+export var fix_hand_distance = 0.3
 
 
 
@@ -38,8 +41,9 @@ export var smoothness = 0.5
 export (int, 0, 360) var yaw_limit = 360
 export (int, 0, 360) var pitch_limit = 360
 
+export var Drone: PackedScene = preload("res://vr/Drone.tscn")
 
-export var move_speed = 1.0
+export var move_speed = 100.0
 
 export var quick_turn_degrees=45
 var _joy_centered=true
@@ -53,7 +57,13 @@ enum VR_MODE {
 	OPENVR = 5
 }
 
+var drone: KinematicBody
+export var gravity = Vector3.DOWN * 10
+export var jump = Vector3.UP * 500.0
+	
+var drone_vel = Vector3()
 
+	
 
 func _ready():
 	setup_HUD()
@@ -77,6 +87,7 @@ func _ready():
 				_initialize_openvr_arvr_interface()
 			_:
 				_autodetect_vr()
+
 
 	
 	
@@ -123,6 +134,7 @@ func _input(event):
 		
 
 func _process(delta_t):
+	_move_drone()
 	_check_and_perform_runtime_config()
 	_check_move(delta_t)
 	#_check_worldscale()
@@ -133,6 +145,29 @@ func _process(delta_t):
 		_process_6dof_joystick_turns()
 	_process_keys()
 	
+
+	
+func _move_drone():
+	if drone == null:
+		drone = Drone.instance()
+		drone.global_transform.origin = $Headset.global_transform.origin
+		get_tree().current_scene.add_child(drone) 
+		
+	var drone_target = $Headset.global_transform.origin
+	#drone_target.y = drone.global_transform.origin.y
+	#drone.translation.x =  self.translation.x + $Headset.translation.x
+	#drone.translation.z =  self.translation.z + $Headset.translation.z
+	var drone_pos =  drone.global_transform.origin
+	#drone_vel = (drone_target - drone_pos)
+	#drone_vel = drone.move_and_slide(drone_vel)
+	
+	#drone.move_and_collide(drone_target - drone_pos)
+	
+	
+	drone.global_transform.origin.z = $Headset.global_transform.origin.z
+	drone.global_transform.origin.x = $Headset.global_transform.origin.x
+	
+
 	
 func _process_mouse_rotation():
 	var offset = Vector2(Input.get_action_strength("rotate_right") - Input.get_action_strength("rotate_left"),
@@ -152,12 +187,12 @@ func _process_mouse_rotation():
 	$Headset.rotate_object_local(Vector3(1,0,0), deg2rad(-_pitch))
 	
 	$LeftController.transform = $Headset.transform
-	$LeftController.translate(Vector3(-0.2,-0.1,-0.2))
+	$LeftController.translate(Vector3(-fix_hand_distance,-0.1,-0.2))
 	#$LeftController.rotation = $Headset.rotation
 	#$LeftController.translation = Vector3(-0.2,-0.1,-0.2).rotated(Vector3.RIGHT, $LeftController.rotation.x).rotated(Vector3.UP, $LeftController.rotation.y)
 	
 	$RightController.transform = $Headset.transform
-	$RightController.translate(Vector3(0.2,-0.1,-0.2))
+	$RightController.translate(Vector3(fix_hand_distance,-0.1,-0.2))
 	
 
 
@@ -361,23 +396,45 @@ func _check_move(delta_t):
 		dy = Input.get_action_strength("walk_forwards") - Input.get_action_strength("walk_backwards");
 	var dead_zone = 0.125;
 	
+	#
+	var view_dir = -$Headset.transform.basis.z;
+	var strafe_dir = $Headset.transform.basis.x;
+
+	view_dir.y = 0.0;
+	strafe_dir.y = 0.0;
+
+	view_dir = view_dir.normalized();
+	strafe_dir = strafe_dir.normalized();
+
+	var move_vector = Vector2(dx, dy) * move_speed;
+
+	var mx = strafe_dir * move_vector.x
+	var my = view_dir * move_vector.y
+	
+
+	# to move the player in VR the position of the ARVROrigin needs to be
+	# changed. As this script is attached to the ARVROrigin self is modified here
+	#self.transform.origin += view_dir * move_vector.y * delta_t;
+	#self.transform.origin += strafe_dir * move_vector.x * delta_t;
+
 	if (dx*dx + dy*dy > dead_zone*dead_zone):
-		var view_dir = -$Headset.transform.basis.z;
-		var strafe_dir = $Headset.transform.basis.x;
+		drone_vel += mx * delta_t
+		drone_vel += my * delta_t
+	drone_vel.x = lerp(drone_vel.x, 0, 0.1)
+	drone_vel.z = lerp(drone_vel.z, 0, 0.1)
+	
+		
+	if drone.is_on_floor():
+		if $LeftController.is_button_pressed(CONTROLLER_BUTTON.THUMBSTICK) or Input.is_action_just_pressed("jump"):
+			drone_vel += jump * delta_t
 
-		view_dir.y = 0.0;
-		strafe_dir.y = 0.0;
+	var drone_start = drone.translation
+	drone_vel += gravity * delta_t
+	drone_vel = drone.move_and_slide(drone_vel, Vector3.UP)
+	var drone_moved = drone.translation - drone_start
+	self.translate(drone_moved)
 
-		view_dir = view_dir.normalized();
-		strafe_dir = strafe_dir.normalized();
-
-		var move_vector = Vector2(dx, dy).normalized() * move_speed;
-
-		# to move the player in VR the position of the ARVROrigin needs to be
-		# changed. As this script is attached to the ARVROrigin self is modified here
-		self.transform.origin += view_dir * move_vector.y * delta_t;
-		self.transform.origin += strafe_dir * move_vector.x * delta_t;
-
+			
 
 
 
