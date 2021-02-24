@@ -17,7 +17,6 @@ data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, 
 [node name="Level" type="Spatial"]
 
 [node name="Ground" type="MeshInstance" parent="."]
-visible = false
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
