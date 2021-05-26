@@ -66,6 +66,7 @@ var drone_vel = Vector3()
 	
 
 func _ready():
+	_setup_input_events()
 	setup_HUD()
 	
 	var args = OS.get_cmdline_args()
@@ -88,7 +89,11 @@ func _ready():
 			_:
 				_autodetect_vr()
 
-
+func _setup_input_events():
+	for button in CONTROLLER_BUTTON.keys():
+		print("Adding "+button)
+		InputMap.add_action("VR_LEFT_"+button)
+		InputMap.add_action("VR_RIGHT_"+button)
 	
 	
 func _autodetect_vr():
@@ -562,6 +567,7 @@ func _on_RightController_button_pressed(button):
 	var action = "VR_RIGHT_"+CONTROLLER_BUTTON.keys()[button]
 	print("PRESSED: "+action)
 	Input.action_press(action)
+
 	
 #	if (button == CONTROLLER_BUTTON.YB):
 #		print("rumble test")
@@ -581,6 +587,7 @@ func _on_RightController_button_release(button):
 	var action = "VR_RIGHT_"+CONTROLLER_BUTTON.keys()[button]
 	print("RELEASED: "+action)
 	Input.action_release(action)	
+	
 #	if (button != CONTROLLER_BUTTON.YB): return;
 #
 #	if (ovr_utilities):

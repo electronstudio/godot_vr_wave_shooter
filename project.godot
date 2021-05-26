@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -28,7 +27,6 @@ Globals="*res://Globals.gd"
 window/size/width=2560
 window/size/height=1440
 window/size/resizable=false
-window/size/fullscreen=true
 
 [gdnative]
 

@@ -34,6 +34,7 @@ height = 0.001
 
 [node name="VR" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
 
 [node name="HUD" parent="VR/Headset" index="0"]
 material/0 = SubResource( 2 )
@@ -47,6 +48,7 @@ environment = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0202332 )
 mesh = SubResource( 5 )
 material/0 = null
+
 [connection signal="mesh_updated" from="VR/LeftController" to="VR" method="_on_LeftController_mesh_updated"]
 
 [editable path="VR"]
