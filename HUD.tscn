@@ -110,3 +110,14 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="fps" type="Label" parent="."]
+margin_left = 946.7
+margin_top = 1049.36
+margin_right = 1127.71
+margin_bottom = 1118.36
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

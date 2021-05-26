@@ -90,6 +90,8 @@ func _ready():
 				_autodetect_vr()
 
 func _setup_input_events():
+	InputMap.add_action("VR_SCREEN_TAP")
+	InputMap.add_action("jump")
 	for button in CONTROLLER_BUTTON.keys():
 		print("Adding "+button)
 		InputMap.add_action("VR_LEFT_"+button)
@@ -138,7 +140,7 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 
-func _process(delta_t):
+func _physics_process(delta_t):
 	_move_drone()
 	_check_and_perform_runtime_config()
 	_check_move(delta_t)
@@ -149,8 +151,19 @@ func _process(delta_t):
 	else:
 		_process_6dof_joystick_turns()
 	_process_keys()
+#
+#func _process(delta_t):
+#	_move_drone()
+#	_check_and_perform_runtime_config()
+#	_check_move(delta_t)
+#	#_check_worldscale()
+#	_update_controllers_vibration(delta_t)
+#	if fix_hand_position: 
+#		_process_mouse_rotation()
+#	else:
+#		_process_6dof_joystick_turns()
+#	_process_keys()
 	
-
 	
 func _move_drone():
 	if drone == null:

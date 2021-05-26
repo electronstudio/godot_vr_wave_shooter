@@ -30,6 +30,7 @@ func _score_points(points):
 func _process(_delta):
 	HUD.get_node("score").text = str(score)
 	HUD.get_node("health").text = str(health)
+	HUD.get_node("fps").text = str(Engine.get_frames_per_second())
 	_show_wave()
 
 func enemy_hit(damage):
