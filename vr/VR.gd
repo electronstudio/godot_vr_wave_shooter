@@ -442,9 +442,11 @@ func _check_move(delta_t):
 	drone_vel.z = lerp(drone_vel.z, 0, 0.1)
 	
 		
-	if drone.is_on_floor():
+	jump_timer -= delta_t
+	if drone.is_on_floor() and jump_timer<0:
 		if $LeftController.is_button_pressed(CONTROLLER_BUTTON.THUMBSTICK) or Input.is_action_just_pressed("jump"):
 			drone_vel += jump * delta_t
+			jump_timer = 0.2
 
 	var drone_start = drone.translation
 	drone_vel += gravity * delta_t
@@ -453,7 +455,7 @@ func _check_move(delta_t):
 	self.translate(drone_moved)
 
 			
-
+var jump_timer = 0
 
 
 func _start_controller_vibration(controller, duration, rumble_intensity):
