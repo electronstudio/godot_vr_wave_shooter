@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "uk.co.electronstudio.scaryskeletons2",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "PROCESSED_RES"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 3,
+        "versionName": "1.0.3",
+        "outputFile": "android_debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "resources-debug.ap_",
+      "properties": {
+        "packageId": "uk.co.electronstudio.scaryskeletons2",
+        "split": "",
+        "minSdkVersion": "18"
+      }
+    }
+  ]
+}

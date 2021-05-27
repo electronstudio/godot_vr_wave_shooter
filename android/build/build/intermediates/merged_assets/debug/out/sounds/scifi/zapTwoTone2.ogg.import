@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zapTwoTone2.ogg-8bf8135f6a0eb633858ae0ce04b80698.oggstr"
+
+[deps]
+
+source_file="res://sounds/scifi/zapTwoTone2.ogg"
+dest_files=[ "res://.import/zapTwoTone2.ogg-8bf8135f6a0eb633858ae0ce04b80698.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

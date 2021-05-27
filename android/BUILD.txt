@@ -1,1 +1,0 @@
- apksigner sign --ks ~/Documents/scaryskeletons.keystore --ks-key-alias release scary_skeletons.apk

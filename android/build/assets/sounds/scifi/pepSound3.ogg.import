@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pepSound3.ogg-9234cb25b82628e21b22d2f0dff1e0bc.oggstr"
+
+[deps]
+
+source_file="res://sounds/scifi/pepSound3.ogg"
+dest_files=[ "res://.import/pepSound3.ogg-9234cb25b82628e21b22d2f0dff1e0bc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

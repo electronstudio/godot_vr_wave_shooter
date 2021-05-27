@@ -3,6 +3,9 @@
 # Fix Viewport errors
 # Teleportation
 # Prevent walking through
+# why are pngs so large?
+# p
+
 extends ARVROrigin
 
 var ovr_init_config = null;

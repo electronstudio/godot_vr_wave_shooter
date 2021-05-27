@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zapThreeToneDown.ogg-bf38ca5d057b91405784024723f842f7.oggstr"
+
+[deps]
+
+source_file="res://sounds/scifi/zapThreeToneDown.ogg"
+dest_files=[ "res://.import/zapThreeToneDown.ogg-bf38ca5d057b91405784024723f842f7.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

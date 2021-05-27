@@ -8,8 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "OculusTracker",
+"class": "OculusHandTracker",
+"language": "GDScript",
+"path": "res://addons/godot_ovrmobile/example_scenes/oculus_hand_tracker.gd"
+}, {
+"base": "OculusTracker",
+"class": "OculusTouchController",
+"language": "GDScript",
+"path": "res://addons/godot_ovrmobile/example_scenes/oculus_touch_controller.gd"
+}, {
+"base": "ARVRController",
+"class": "OculusTracker",
+"language": "GDScript",
+"path": "res://addons/godot_ovrmobile/example_scenes/oculus_tracker.gd"
+} ]
 _global_script_class_icons={
+"OculusHandTracker": "",
+"OculusTouchController": "",
+"OculusTracker": ""
 }
 
 [application]
@@ -28,14 +46,18 @@ window/size/width=2560
 window/size/height=1440
 window/size/resizable=false
 
-[editor]
+[editor_plugins]
 
-main_run_args="5"
+enabled=PoolStringArray( "res://addons/godot-openvr/plugin.cfg" )
 
 [gdnative]
 
 singletons=[ "res://addons/godot-oculus/godot_oculus.gdnlib", "res://addons/godot-openvr/godot_openvr.gdnlib", "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 singletons_disabled=[  ]
+
+[global]
+
+etc=false
 
 [importer_defaults]
 
@@ -1172,4 +1194,3 @@ pointing/emulate_mouse_from_touch=false
 [rendering]
 
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
