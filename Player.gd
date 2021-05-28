@@ -9,13 +9,10 @@ onready var HUD = get_node("/root/Main/VR/Headset/HUD/Viewport/HUD")
 
 func _ready():
 	Globals.connect("score_points", self, "_score_points")
-#	for i in range(0, 100):
-#		print(i, " ", 1 + pow(i, 0.6) * 0.3)
-#
+
 
 func _show_wave():
 	var wave = round(1 + pow(score, 0.6) * 0.3)
-	#print("wave "+str(wave))
 	if wave > Globals.wave:
 		Globals.wave = wave
 		HUD.get_node("Message").text = "WAVE "+str(Globals.wave)
