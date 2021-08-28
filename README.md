@@ -33,3 +33,4 @@ Blaster models by https://kenney.nl
 
 Sci-fi sounds by https://kenney.nl
 
+Photo by Lino Schmid https://commons.wikimedia.org/wiki/User:Capricorn4049#Credit
